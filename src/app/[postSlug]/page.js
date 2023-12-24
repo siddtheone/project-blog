@@ -1,23 +1,34 @@
-import React from 'react';
+import React from "react";
 
-import BlogHero from '@/components/BlogHero';
+import BlogHero from "@/components/BlogHero";
 
-import styles from './postSlug.module.css';
+import styles from "./postSlug.module.css";
+import { loadBlogPost } from "@/helpers/file-helpers";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import CodeSnippet from "@/components/CodeSnippet";
 
-function BlogPost() {
+export async function generateMetadata({ params }) {
+  const {
+    frontmatter: { title, abstract: description },
+  } = await loadBlogPost(params.postSlug);
+
+  return {
+    title,
+    description,
+  };
+}
+
+async function BlogPost({ params }) {
+  const {
+    frontmatter: { title, publishedOn },
+    content,
+  } = await loadBlogPost(params.postSlug);
+
   return (
     <article className={styles.wrapper}>
-      <BlogHero
-        title="Example post!"
-        publishedOn={new Date()}
-      />
+      <BlogHero title={title} publishedOn={new Date(publishedOn)} />
       <div className={styles.page}>
-        <p>This is where the blog post will go!</p>
-        <p>
-          You will need to use <em>MDX</em> to render all of
-          the elements created from the blog post in this
-          spot.
-        </p>
+        <MDXRemote source={content} components={{ pre: CodeSnippet }} />
       </div>
     </article>
   );
