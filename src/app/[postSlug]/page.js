@@ -1,11 +1,20 @@
 import React from "react";
-
+import dynamic from "next/dynamic";
 import BlogHero from "@/components/BlogHero";
 
 import styles from "./postSlug.module.css";
 import { loadBlogPost } from "@/helpers/file-helpers";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import CodeSnippet from "@/components/CodeSnippet";
+
+const CodeSnippet = dynamic(() => import("@/components/CodeSnippet"));
+
+const DivisionGroupsDemo = dynamic(() =>
+  import("@/components/DivisionGroupsDemo")
+);
+
+const CircularColorsDemo = dynamic(() =>
+  import("@/components/CircularColorsDemo")
+);
 
 export async function generateMetadata({ params }) {
   const {
@@ -28,7 +37,14 @@ async function BlogPost({ params }) {
     <article className={styles.wrapper}>
       <BlogHero title={title} publishedOn={new Date(publishedOn)} />
       <div className={styles.page}>
-        <MDXRemote source={content} components={{ pre: CodeSnippet }} />
+        <MDXRemote
+          source={content}
+          components={{
+            pre: CodeSnippet,
+            DivisionGroupsDemo,
+            CircularColorsDemo,
+          }}
+        />
       </div>
     </article>
   );
