@@ -246,3 +246,7 @@ button {
   --color-card-background: var(--color-gray-0);
   --color-card-border: transparent;
 }
+
+.errorText {
+  text-align: center;
+}

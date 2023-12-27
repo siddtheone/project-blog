@@ -1,9 +1,10 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import BlogHero from "@/components/BlogHero";
+import { notFound } from "next/navigation";
 
 import styles from "./postSlug.module.css";
-import { loadBlogPost } from "@/helpers/file-helpers";
+import { loadBlogPost, readFile } from "@/helpers/file-helpers";
 import { MDXRemote } from "next-mdx-remote/rsc";
 
 const CodeSnippet = dynamic(() => import("@/components/CodeSnippet"));
@@ -28,6 +29,11 @@ export async function generateMetadata({ params }) {
 }
 
 async function BlogPost({ params }) {
+  try {
+    await readFile(params.postSlug);
+  } catch (e) {
+    notFound();
+  }
   const {
     frontmatter: { title, publishedOn },
     content,

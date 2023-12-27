@@ -30,7 +30,7 @@ export const loadBlogPost = React.cache(async (slug) => {
   return { frontmatter, content };
 });
 
-function readFile(localPath) {
+export function readFile(localPath) {
   return fs.readFile(path.join(process.cwd(), localPath), "utf8");
 }
 
