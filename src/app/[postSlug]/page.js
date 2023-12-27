@@ -30,7 +30,7 @@ export async function generateMetadata({ params }) {
 
 async function BlogPost({ params }) {
   try {
-    await readFile(params.postSlug);
+    await readFile(`/content/${params.postSlug}.mdx`);
   } catch (e) {
     notFound();
   }
