@@ -197,13 +197,13 @@ button {
 
   --color-primary: var(--color-primary-500);
   --color-secondary: var(--color-secondary-500);
-  --color-inline-code-bg: "hsl(256deg 30% 22%)";
-  --color-selection-text: "white";
-  --color-selection-background: "hsl(256deg 100% 30%)";
+  --color-inline-code-bg: hsl(256deg 30% 22%);
+  --color-selection-text: white;
+  --color-selection-background: hsl(256deg 100% 30%);
   --color-backdrop: var(--color-decorative-100);
   --color-backdrop-highlight: var(--color-decorative-500);
-  --color-page-background: "transparent";
-  --color-page-border: "hsl(256deg 30% 50% / 0.2)";
+  --color-page-background: transparent;
+  --color-page-border: hsl(256deg 30% 50% / 0.2);
   --color-card-background: var(--color-backdrop);
   --color-card-border: var(--color-page-border);
 }
